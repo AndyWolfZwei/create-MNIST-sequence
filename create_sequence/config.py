@@ -27,5 +27,5 @@ class ImgProcessPara:
         self.dilate_kernel = (1, 2)
 
         self.multi_core = 0
-        self.generated_number = 100
+        self.size = 100
 

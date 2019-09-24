@@ -24,6 +24,21 @@ def noise_img(img, noise_ratio):
     return img
 
 
+def split_margin(img):
+    width = img.shape[1]
+    v_sum = np.sum(img, axis=0)
+    left = 0
+    right = width - 1
+    for i in range(width):
+        if v_sum[i] > 0:
+            left = i
+            break
+    for i in range(width - 1, -1, -1):
+        if v_sum[i] > 0:
+            right = i
+            break
+    return img[:, left:right]
+
 def add_erode(img, erode_kernel):
     kernel = cv2.getStructuringElement(cv2.MORPH_RECT, erode_kernel)
     img = cv2.erode(img,kernel)

@@ -23,7 +23,7 @@ def args_parse():
     parser.add_argument("-r", "--read_from_config", default=False, action='store_true',
                         help="True means read parameters from config, False will read from command line")
     parser.add_argument("-num", "--number", required=True, type=str, help="The sequence which need to be transformed")
-    parser.add_argument("-wd", "--image_width", default=200, type=int, help="Width of output image")
+    parser.add_argument("-iw", "--image_width", default=200, type=int, help="Width of output image")
     parser.add_argument("-min", "--min_spacing", default=0, type=int, help="Minimum space between two digits")
     parser.add_argument("-max", "--max_spacing", default=10, type=int, help="Maximum space between two digits")
     # data augmentation argument
@@ -35,7 +35,7 @@ def args_parse():
     parser.add_argument("-n", "--noise_ratio", help="Noise ratio for every digit")
     # multiprocessing argument
     parser.add_argument("-m", "--multi_core", default=0, type=int, help="Directory to save data in")
-    parser.add_argument("-g", "--generated_number", default=100, type=int, help="Directory to save data in")
+    parser.add_argument("-s", "--size", default=100, type=int, help="Directory to save data in")
 
     args = vars(parser.parse_args())
     num = args['number']
