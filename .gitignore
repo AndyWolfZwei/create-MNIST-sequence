@@ -1,2 +1,12 @@
+*.egg-info
+.cache
+__pycache__
+*.swp
+*.pyc
+*.pkl
+*.py~
+.pytest_cache
+.DS_Store
+.idea
 mnist_data/
 output/

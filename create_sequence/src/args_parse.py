@@ -19,25 +19,27 @@ def args_parse():
     parser = argparse.ArgumentParser(description="Create sequence digits from MNIST")
     parser.add_argument("-c", "--cache", default=os.path.join(sys.path[0], "mnist_data"),
                         help="Directory to save data in")
-    # basic argument
+    parser.add_argument("-o", "--output_path", default=None, help="Directory to save result in")
+    # basic arguments
     parser.add_argument("-r", "--read_from_config", default=False, action='store_true',
                         help="True means read parameters from config, False will read from command line")
     parser.add_argument("-num", "--number", required=True, type=str, help="The sequence which need to be transformed")
     parser.add_argument("-iw", "--image_width", default=200, type=int, help="Width of output image")
     parser.add_argument("-min", "--min_spacing", default=0, type=int, help="Minimum space between two digits")
     parser.add_argument("-max", "--max_spacing", default=10, type=int, help="Maximum space between two digits")
-    # data augmentation argument
+    # data augmentation arguments
     parser.add_argument("-da", "--data_augmentation", default=False, action='store_true',  help="Data augmentation")
     parser.add_argument("-ra", "--random_all", default=False, action='store_true',  help="Ture means random selection these data augmentation functions with 0.5 probability, ")
     parser.add_argument("-e", "--erode_kernel", default=(1,2),nargs=2, help="Image erosion requires accepting two parameters as erode kernel")
     parser.add_argument("-d", "--dilate_kernel", default=(2,1),nargs=2, help="Same with erode parameter")
     parser.add_argument("-a", "--angle", help="Rotation angle for every digit")
     parser.add_argument("-n", "--noise_ratio", help="Noise ratio for every digit")
-    # multiprocessing argument
+    # multiprocessing arguments
     parser.add_argument("-m", "--multi_core", default=0, type=int, help="Directory to save data in")
     parser.add_argument("-s", "--size", default=100, type=int, help="Directory to save data in")
 
     args = vars(parser.parse_args())
+    assert args['number'].isdigit(), 'The input numbers must be composed only digit.'
     num = args['number']
     if args['read_from_config']:
         from config import ImgProcessPara
