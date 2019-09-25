@@ -6,8 +6,18 @@ sequence according to the MNIST dataset. And there also has the function of mult
 
 generated. They will be neatly outputted into a directory for the next training step.
 
+## **Installation**
+```
+cd mercari_v2
+pip install -e .
+```
+## Support System
+-Python >= 3.5
+-Windows
+-Linux
+-MacOS
 
-## **Usage**
+## **Usage With Shell**
 ```
 run.py [-h] [-c CACHE] [-o OUTPUT_PATH] [-r] -num NUMBER
               [-iw IMAGE_WIDTH] [-min MIN_SPACING] [-max MAX_SPACING] [-da]
@@ -54,36 +64,48 @@ optional arguments:
 
 ## **Some Examples**
 
-- Test Example
-   - Just merge these digits without any augmentation:
+### Test Example
+- Just merge these digits without any augmentation:
 ```
 python3 run.py -num 123456 -iw 200 -min 5 -max 10
 ```
-![example1](./example/123456/1.jpg)
-   - Read from config.py. You can just modify these arguments in config.py. But the `-num` must be stated:
+![example1](create_sequence/example/123456/1.jpg)
+- Read from config.py. You can just modify these arguments in config.py. But the `-num` must be stated:
 ```
 python3 run.py -num 123456 -r
 ```
-![example2](./example/123456/2.jpg)
-   - Merge these digits with data augmentation. The data augmentation includes four functions -\>
+![example2](create_sequence/example/123456/2.jpg)
+- Merge these digits with data augmentation. The data augmentation includes four functions -\>
     Rotation, Add Noise, Erode and Dilate:
 ```
 python3 run.py -num 123456 -iw 200 -min 5 -max 10 -da
 ```
-![example3](./example/123456/3.jpg)
-   - Merge these digits with random data augmentation, random Erode and Dilate kernel and randomly
+![example3](create_sequence/example/123456/3.jpg)
+- Merge these digits with random data augmentation, random Erode and Dilate kernel and randomly
     choice these four functions:
 ```
 python3 run.py -num 123456 -iw 200 -min 5 -max 10 -da -ra
 ```
-![example4](./example/123456/4.jpg)
-   - Of course you can set these arguments by `[-e ERODE_KERNEL ERODE_KERNEL] 
+![example4](create_sequence/example/123456/4.jpg)
+- Of course you can set these arguments by `[-e ERODE_KERNEL ERODE_KERNEL] 
    [-d DILATE_KERNEL DILATE_KERNEL] [-a ANGLE] [-n NOISE_RATIO]`
    
-- Batch Generation Examples
+### Batch Generation Examples
    - If a large number of sequence samples need to be generated, the `-m` can solve the problem efficiently。
    It is recommended to use the same parameters as the cpu core number, and the `-s` indicates the amount generated,
    if the argument `-o` is not stated, the output images will be generated to `./output/(123456)/(1).png`:
 ```
 python3 run.py -num 123456 -m 4 -s 100000 [-o /tmp/output/]
+```
+
+## **Usage With Interactive Environment**
+```
+import create_sequence as cs
+cds = cs.CreateDigitSequence()
+```
+- At that time, the number your want to transform is accquired. You can just input it in the environment.
+Then you can modify any arguments in the `cds.args`. If the `create_digit_sequence` need to be used. The below code can
+be used, and you will get the np.ndarray type of image:
+```
+cds.create_digit_sequence('123456', 200, 5, 10)
 ```

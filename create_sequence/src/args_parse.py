@@ -23,7 +23,7 @@ def args_parse():
     # basic arguments
     parser.add_argument("-r", "--read_from_config", default=False, action='store_true',
                         help="True means read parameters from config, False will read from command line")
-    parser.add_argument("-num", "--number", required=True, type=str, help="The sequence which need to be transformed")
+    parser.add_argument("-num", "--number", default=None, type=str, help="The sequence which need to be transformed")
     parser.add_argument("-iw", "--image_width", default=200, type=int, help="Width of output image")
     parser.add_argument("-min", "--min_spacing", default=0, type=int, help="Minimum space between two digits")
     parser.add_argument("-max", "--max_spacing", default=10, type=int, help="Maximum space between two digits")
@@ -39,13 +39,12 @@ def args_parse():
     parser.add_argument("-s", "--size", default=100, type=int, help="Directory to save data in")
 
     args = vars(parser.parse_args())
-    assert args['number'].isdigit(), 'The input numbers must be composed only digit.'
-    num = args['number']
     if args['read_from_config']:
         from config import ImgProcessPara
         args = ImgProcessPara().__dict__
-        if not args['number']:
-            args['number'] = num
+    if not args['number']:
+        args['number'] = input('You didn\'t input the digit sequence you want to transform, please input your digits:')
+    assert args['number'].isdigit(), 'The input numbers must be composed only digit.'
     generate_random(args)
     logging.info("Current arguments are : {}".format(args))
     return args
