@@ -12,10 +12,10 @@ cd mercari_v2
 pip install -e .
 ```
 ## Support System
--Python >= 3.5
--Windows
--Linux
--MacOS
+- Python >= 3.5
+- Windows
+- Linux
+- MacOS
 
 ## **Usage With Shell**
 ```
