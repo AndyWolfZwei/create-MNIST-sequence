@@ -89,10 +89,16 @@ def main():
         CDS.save_sequence_digit(return_np, counter)
         print(return_np)
     else:
-        pool = multiprocessing.Pool(processes=CDS.args['multi_core'])
-        pool.map(CDS.workers, range(counter, counter + CDS.args['size']))
-        pool.close()
-        pool.join()
+        if CDS.args['size'] < 2000:
+            for _ in range(counter,CDS.args['size']+counter):
+                CDS.save_sequence_digit(CDS.create_digit_sequence(CDS.args['number'], CDS.args['image_width'],
+                                  CDS.args['min_spacing'], CDS.args['max_spacing']), counter)
+
+        else:
+            pool = multiprocessing.Pool(processes=CDS.args['multi_core'])
+            pool.map(CDS.workers, range(counter, counter + CDS.args['size']))
+            pool.close()
+            pool.join()
 
 
 if __name__ == '__main__':

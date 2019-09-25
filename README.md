@@ -11,7 +11,7 @@ generated. They will be neatly outputted into a directory for the next training 
 cd mercari_v2
 pip install -e .
 ```
-## Support System
+## **Support System**
 - Python >= 3.5
 - Windows
 - Linux
@@ -64,7 +64,7 @@ optional arguments:
 
 ## **Some Examples**
 
-### Test Example
+### **Test Example**
 - Just merge these digits without any augmentation:
 ```
 python3 run.py -num 123456 -iw 200 -min 5 -max 10
@@ -90,13 +90,16 @@ python3 run.py -num 123456 -iw 200 -min 5 -max 10 -da -ra
 - Of course you can set these arguments by `[-e ERODE_KERNEL ERODE_KERNEL] 
    [-d DILATE_KERNEL DILATE_KERNEL] [-a ANGLE] [-n NOISE_RATIO]`
    
-### Batch Generation Examples
-   - If a large number of sequence samples need to be generated, the `-m` can solve the problem efficiently。
-   It is recommended to use the same parameters as the cpu core number, and the `-s` indicates the amount generated,
-   if the argument `-o` is not stated, the output images will be generated to `./output/(123456)/(1).png`:
+### **Batch Generation Examples**
+- If a large number of sequence samples need to be generated, the `-m` can solve the problem efficiently。
+It is recommended to use the same parameters as the cpu core number, and the `-s` indicates the amount generated,
+if the argument `-o` is not stated, the output images will be generated to `./output/(123456)/(1).png`:
+   - Notice that if the sample size is smaller than 2000, the effectiveness of single process will be faster than multi
+   processes, so the code will automatically execute a single process.
 ```
 python3 run.py -num 123456 -m 4 -s 100000 [-o /tmp/output/]
 ```
+
 
 ## **Usage With Interactive Environment**
 ```
